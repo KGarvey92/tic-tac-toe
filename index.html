@@ -26,9 +26,22 @@
             <div class="gameboardField">E</div>
         </div>
         <button class="newGameBtn">New Game</button>
-        <div class="newGameModal hidden">
-            <form action="/">
-                <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat a eius excepturi esse? Ipsa, non quod animi consequatur facere ipsam aliquam inventore maxime possimus tempore ab accusantium dolorum adipisci illum!</div>
+        <div class="newGameModal">
+            <form class="newGameForm" action="/" method="post">
+                <h2>New Game</h2>
+                <label for="p1Name">P1: <input type="text" name="p1name" id="p1Name" placeholder="Player 1"></label>
+                <label for="p2Name">P2: <input type="text" name="p2name" id="p2Name" placeholder="Player 2"></label>
+                <div class="FormSubheading"> P1 Mark: </div>
+                <div class="radioContainer">
+                    <label for="p1X">X<input type="radio" name="p1Mark" value="X" id="p1X" checked></label>
+                    <label for="p1O">O<input type="radio" name="p1Mark" value="O" id="p1O" ></label>
+                </div>
+                <div class="FormSubheading"> P2 Mark: </div>
+                <div class="radioContainer">
+                    <label for="p2X">X<input type="radio" name="p2Mark" id="p2X" value="X" disabled></label>
+                    <label for="p2O">O<input type="radio" name="p2Mark" id="p2O" value="O" checked disabled></label>
+                </div>
+                <button class="gameStartBtn">Start Game</button>
             </form>
         </div>
     </main>

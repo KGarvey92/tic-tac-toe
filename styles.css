@@ -61,6 +61,29 @@ main {
     padding: 32px;
 }
 
+.newGameForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.radioContainer {
+    display: flex;
+    gap: 10px;
+}
+
+label {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    cursor: pointer;
+}
+
+label input {
+    cursor: pointer;
+}
+
 .hidden {
     opacity: 0;
 }
