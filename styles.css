@@ -32,6 +32,39 @@ main {
     gap: 16px;
 }
 
+.newGameBtn {
+    border-radius: 5px;
+    border: none;
+    box-shadow: 2px 2px black;
+    background-color: hsl(54, 100%, 90%);
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.newGameBtn:active {
+    background-color: hsl(54, 100%, 70%);
+    scale: 0.95;
+}
+
+.newGameModal {
+    box-sizing: border-box;
+    position: fixed;
+    top: 48%;
+    left: 50%;
+    translate: -50% -50%;
+    background-color: lemonchiffon;
+    border: 2px solid black;
+    width: 70%;
+    max-width: 500px;
+    height: 45%;
+    border-radius: 5px;
+    padding: 32px;
+}
+
+.hidden {
+    opacity: 0;
+}
+
 .gridContainer {
     display: grid;
     grid-template-columns: repeat(3, auto);

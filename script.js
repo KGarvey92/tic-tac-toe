@@ -19,7 +19,7 @@ const gameController = (() => {
     const newGame = () => {
         const btn = document.querySelector('.newGameBtn');
         btn.addEventListener('click', () => {
-            console.log('clicked');
+            document.querySelector('.newGameModal').classList.toggle('hidden');
         })
     }
 
