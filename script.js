@@ -1,6 +1,7 @@
 // TODO: Module to create and manage gameboard
 const gameboard = (() => {
 
+    // TODO: remove current gameboard text
 
     // TODO: create array to store gameboard
 
@@ -11,7 +12,12 @@ const gameboard = (() => {
 })();
 
 // TODO: Factory function to handle players
-//const playerFactory = (playerName, mark)
+const playerFactory = (playerName, playerMark) => {
+    const player = {};
+    player.name = playerName;
+    player.mark = playerMark;
+    return player;
+}
 
 // TODO: Module to handle game flow.
 const gameController = (() => {
@@ -52,9 +58,12 @@ const gameController = (() => {
         if (p2Name === '') {
             p2Name = 'Player 2';
         }
-        
-        // create player objects using data
-        
+
+        // TODO: create player objects using data
+        let player1 = playerFactory(p1Name, p1Mark);
+        let player2 = playerFactory(p2Name, p2Mark);
+        console.log(player1);
+        console.log(player2);
         })
 
     }
