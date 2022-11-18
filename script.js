@@ -11,7 +11,7 @@ const gameboard = (() => {
 })();
 
 // TODO: Factory function to handle players
-// const playerFactory = (name, mark)
+//const playerFactory = (playerName, mark)
 
 // TODO: Module to handle game flow.
 const gameController = (() => {
@@ -33,14 +33,30 @@ const gameController = (() => {
             document.querySelector('#p2X').setAttribute("checked", "");
         });
 
-        // prevent default form submission behaviour
+        // prevent default form submission behaviour and hide form
         const form = document.querySelector('form');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-        })
+            document.querySelector('.newGameModal').classList.toggle('hidden');
+
+        // TODO: call gameboard module to prepare board
+
+        // store inputted data (names, marks)
+        let p1Name = document.querySelector('#p1Name').value;
+        let p2Name = document.querySelector('#p2Name').value;
+        let p1Mark = document.querySelector('input[name=p1Mark]:checked').value;
+        let p2Mark = document.querySelector('input[name=p2Mark]:checked').value;
+        if (p1Name === '') {
+            p1Name = 'Player 1';
+        }
+        if (p2Name === '') {
+            p2Name = 'Player 2';
+        }
         
-        // TODO: store and use inputted data (names, marks)
-            // create player objects using data
+        // create player objects using data
+        
+        })
+
     }
 
     return {

@@ -29,8 +29,8 @@
         <div class="newGameModal">
             <form class="newGameForm" action="/" method="post">
                 <h2>New Game</h2>
-                <label for="p1Name">P1: <input type="text" name="p1name" id="p1Name" placeholder="Player 1"></label>
-                <label for="p2Name">P2: <input type="text" name="p2name" id="p2Name" placeholder="Player 2"></label>
+                <label for="p1Name">P1: <input type="text" name="p1name" id="p1Name" placeholder="Player 1" pattern="[a-zA-Z0-9]+" oninvalid="this.setCustomValidity('Please use letters and numbers only.')"></label>
+                <label for="p2Name">P2: <input type="text" name="p2name" id="p2Name" placeholder="Player 2" pattern="[a-zA-Z0-9]+" oninvalid="this.setCustomValidity('Please use letters and numbers only.')"></label>
                 <div class="FormSubheading"> P1 Mark: </div>
                 <div class="radioContainer">
                     <label for="p1X">X<input type="radio" name="p1Mark" value="X" id="p1X" checked></label>
