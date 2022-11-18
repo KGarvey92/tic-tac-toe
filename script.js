@@ -11,39 +11,31 @@ const gameboard = (() => {
 
 })();
 
-// TODO: Factory function to handle players
-const playerFactory = (playerName, playerMark) => {
+// Factory function to create player objects
+const playerFactory = (playerNum) => {
+    if (playerNum === 'p1') {
     const player = {};
-    player.name = playerName;
-    player.mark = playerMark;
+    player.name = document.querySelector('#p1Name').value;
+    if (player.name === '') {
+        player.name = 'Player 1';
+    }
+    player.mark = document.querySelector('input[name=p1Mark]:checked').value;
     return player;
+    }
+    else {
+        const player = {};
+        player.name = document.querySelector('#p2Name').value;
+        if (player.name === '') {
+            player.name = 'Player 2';
+        }
+        player.mark = document.querySelector('input[name=p2Mark]:checked').value;
+        return player;         
+    }
 }
 
 // TODO: Module to handle game flow.
 const gameController = (() => {
 
-    const newGame = () => {
-        
-        // TODO: call gameboard module to prepare board
-    
-        // store inputted data (names, marks)
-        let p1Name = document.querySelector('#p1Name').value;
-        let p2Name = document.querySelector('#p2Name').value;
-        let p1Mark = document.querySelector('input[name=p1Mark]:checked').value;
-        let p2Mark = document.querySelector('input[name=p2Mark]:checked').value;
-        if (p1Name === '') {
-            p1Name = 'Player 1';
-        }
-        if (p2Name === '') {
-            p2Name = 'Player 2';
-        }
-
-        // TODO: create player objects using data
-        let player1 = playerFactory(p1Name, p1Mark);
-        let player2 = playerFactory(p2Name, p2Mark);
-        console.log(player1);
-        console.log(player2);
-        }
 
     })();
 
@@ -66,9 +58,15 @@ const gameController = (() => {
         document.querySelector('#p2X').setAttribute("checked", "");
     });
 
-    // Prevent default form submission behaviour and hide form
+    // Prevent default form submission behaviour, create player objects and hide form
     const form = document.querySelector('form');
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         document.querySelector('.newGameModal').classList.toggle('hidden');
+        player1 = playerFactory('p1');
+        player2 = playerFactory('p2');
+        console.log([player1, player2]);
         });
+
+let player1;
+let player2;
