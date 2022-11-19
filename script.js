@@ -1,26 +1,29 @@
 // TODO: Module to create and manage gameboard
 const gameboard = (() => {
 
-    // TODO: remove current gameboard text
+    // TODO: clear gameboard
 
-    // TODO: create array to store gameboard
+    // TODO: add event listeners to each board space
 
-    // TODO: display gameboard on page
+    // TODO: create array to store gamestate
 
-    // TODO: add event listeners to update dom and array
+    // TODO: check gameboard for winner
+
+        // TODO: If winner report mark to game controller
+
 
 })();
 
 // Factory function to create player objects
 const playerFactory = (playerNum) => {
     if (playerNum === 'p1') {
-    const player = {};
-    player.name = document.querySelector('#p1Name').value;
-    if (player.name === '') {
-        player.name = 'Player 1';
-    }
-    player.mark = document.querySelector('input[name=p1Mark]:checked').value;
-    return player;
+        const player = {};
+        player.name = document.querySelector('#p1Name').value;
+        if (player.name === '') {
+            player.name = 'Player 1';
+        }
+        player.mark = document.querySelector('input[name=p1Mark]:checked').value;
+        return player;
     }
     else {
         const player = {};
@@ -36,7 +39,21 @@ const playerFactory = (playerNum) => {
 // TODO: Module to handle game flow.
 const gameController = (() => {
 
+    // TODO: Create and store players
+    const players = () => {
+        let p1 = playerFactory('p1');
+        let p2 = playerFactory('p2');
+        console.log({p1, p2});
+    }
 
+    // TODO: Check active player
+
+    // TODO: Display winner (take winning mark as argument)
+        // if player.mark = O/X -> display player.name
+    return {
+        players
+    };
+ 
     })();
 
 //Event listeners
@@ -63,10 +80,5 @@ const gameController = (() => {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         document.querySelector('.newGameModal').classList.toggle('hidden');
-        player1 = playerFactory('p1');
-        player2 = playerFactory('p2');
-        console.log([player1, player2]);
+        gameController.players();
         });
-
-let player1;
-let player2;

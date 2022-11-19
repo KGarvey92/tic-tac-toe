@@ -85,7 +85,7 @@ label input {
 }
 
 .hidden {
-    opacity: 0;
+    visibility: hidden;
 }
 
 .gridContainer {
@@ -93,6 +93,7 @@ label input {
     grid-template-columns: repeat(3, auto);
     background-color: black;
     gap: 8px;
+    cursor: pointer;
 }
 
 .gameboardField {
