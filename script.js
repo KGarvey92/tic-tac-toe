@@ -1,16 +1,29 @@
 // TODO: Module to create and manage gameboard
 const gameboard = (() => {
 
-    // TODO: clear gameboard
+    //Initalise gameboard array
+    const boardArray = new Array(9);
+    boardArray[0] = 'YabbaDabbaDoo!';
 
-    // TODO: add event listeners to each board space
+    // TODO: clear gameboard and add new event listeners
+    const resetBoard = () => {
+        const board = document.querySelectorAll('.gameboardField');
+        board.forEach(element => element.innerHTML = '');
+    }
 
-    // TODO: create array to store gamestate
-
+    const resetArray = () => {
+        boardArray.length = 0;
+        boardArray.length = 9;
+    }
+    
     // TODO: check gameboard for winner
 
         // TODO: If winner report mark to game controller
 
+    return {
+        resetBoard,
+        resetArray
+    };
 
 })();
 
@@ -39,19 +52,25 @@ const playerFactory = (playerNum) => {
 // TODO: Module to handle game flow.
 const gameController = (() => {
 
-    // TODO: Create and store players
-    const players = () => {
-        let p1 = playerFactory('p1');
-        let p2 = playerFactory('p2');
-        console.log({p1, p2});
+    // Initialise player variables within gameController
+    let p1;
+    let p2;
+
+    const createPlayers = () => {
+        p1 = playerFactory('p1');
+        p2 = playerFactory('p2');
     }
+
+    // TODO: Reset previous game
+        // reset gameboard display and array, set active player randomly
+
 
     // TODO: Check active player
 
     // TODO: Display winner (take winning mark as argument)
         // if player.mark = O/X -> display player.name
     return {
-        players
+        createPlayers
     };
  
     })();
@@ -80,5 +99,5 @@ const gameController = (() => {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         document.querySelector('.newGameModal').classList.toggle('hidden');
-        gameController.players();
+        gameController.createPlayers();
         });
