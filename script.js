@@ -14,10 +14,12 @@ const gameboard = (() => {
             if (element.innerHTML !== ''){
                 element.innerHTML = '';
                 element.addEventListener('click', () =>{
-                    element.innerHTML = activeMark;
-                    //report to gameboard array
-                    boardArray[element.dataset.index] = activeMark;
-                    gameController.changeActive();
+                    if (element.innerHTML === ''){
+                        element.innerHTML = activeMark;
+                        //report to gameboard array
+                        boardArray[element.dataset.index] = activeMark;
+                        gameController.changeActive();
+                    }
                 }, {once: true});
             }})
     }
@@ -25,6 +27,15 @@ const gameboard = (() => {
     const resetArray = () => {
         boardArray.length = 0;
         boardArray.length = 9;
+    }
+
+    // display ai turn on board, field of ai move
+    const aiMark = (field) => {
+        const board = document.querySelectorAll('.gameboardField');
+        board.forEach(element => { if(element.dataset.index == field) {
+            element.innerHTML = activeMark;
+        }
+    })
     }
 
     const updateMark = (mark) => {
@@ -38,6 +49,8 @@ const gameboard = (() => {
         resetBoard,
         resetArray,
         activeMark,
+        boardArray,
+        aiMark,
         updateMark
     };
 
@@ -119,10 +132,22 @@ const gameController = (() => {
 
     // TODO: Display winner (take winning mark as argument)
         // if player.mark = O/X -> display player.name
+
+    // TODO: AI turn logic
+    const aiTurn = () => {
+        // TODO: AI logic
+        
+        // taking turn
+        gameboard.aiMark();
+        changeActive();
+    }
+
+
     return {
         createPlayers,
         changeActive,
-        resetGame
+        resetGame,
+        aiTurn
     };
  
     })();
