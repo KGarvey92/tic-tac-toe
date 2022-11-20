@@ -23,11 +23,12 @@ h1, footer p {
 }
 
 main {
+    position: relative;
     flex: 9;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     gap: 16px;
 }
@@ -47,18 +48,19 @@ main {
 }
 
 .newGameModal {
-    box-sizing: border-box;
     position: fixed;
-    top: 48%;
-    left: 50%;
-    translate: -50% -50%;
+    box-sizing: border-box;
     background-color: lemonchiffon;
     border: 2px solid black;
-    width: 70%;
-    height: 325px;    
-    max-width: 500px;
+    width: 400px;
+    height: 400px;    
     border-radius: 5px;
     padding: 32px;
+    font-size: 1.2rem;
+}
+
+.newGameModal::backdrop {
+    background-color: black;
 }
 
 .newGameForm {
@@ -94,6 +96,8 @@ label input {
     background-color: black;
     gap: 8px;
     cursor: pointer;
+    border: 10px solid black;
+    border-radius: 8px;
 }
 
 .gameboardField {
@@ -104,5 +108,10 @@ label input {
     width: 100px;
     font-family:Arial, Helvetica, sans-serif;
     font-size: 90px;
-    background-color: white;
+    background-color: white;;
+}
+
+.gameAnnouncer {
+    text-align: center;
+    font-size: 2rem;
 }

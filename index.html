@@ -14,6 +14,8 @@
         <h1>Tic-Tac-Toe</h1>
     </header>
     <main>
+        <h2 class="gameAnnouncer">Get your tic-tac-toe on!
+        </h2>
         <div class="gridContainer">
             <div class="gameboardField" data-index="0">T</div>
             <div class="gameboardField" data-index="1">I</div>
@@ -26,7 +28,7 @@
             <div class="gameboardField" data-index="8">E</div>
         </div>
         <button class="newGameBtn">New Game</button>
-        <div class="newGameModal">
+        <div class="newGameModal hidden">
             <form class="newGameForm" action="/" method="post">
                 <h2>New Game</h2>
                 <label for="p1Name">P1: <input type="text" name="p1name" id="p1Name" placeholder="Player 1" pattern="[a-zA-Z0-9]+" oninvalid="this.setCustomValidity('Please use letters and numbers only.')"></label>

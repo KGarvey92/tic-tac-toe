@@ -3,12 +3,11 @@ const gameboard = (() => {
 
     //Initalise gameboard array
     const boardArray = new Array(9);
-    boardArray[0] = 'YabbaDabbaDoo!';
 
     //Set active mark
     let activeMark = "";
 
-    // TODO: clear gameboard and add new event listeners
+    // clear gameboard and add new event listeners
     const resetBoard = () => {
         const board = document.querySelectorAll('.gameboardField');
         board.forEach(element => {
@@ -16,6 +15,8 @@ const gameboard = (() => {
                 element.innerHTML = '';
                 element.addEventListener('click', () =>{
                     element.innerHTML = activeMark;
+                    //report to gameboard array
+                    boardArray[element.dataset.index] = activeMark;
                     gameController.changeActive();
                 }, {once: true});
             }})
@@ -78,21 +79,23 @@ const gameController = (() => {
         p2 = playerFactory('p2');
     }
 
-    // TODO: Reset previous game
+    // Reset previous game
     const resetGame = () => {
         gameboard.resetArray();
         gameboard.resetBoard();
         Math.random() < 0.5 ? p1.active = true : p2.active = true;
         if (p1.active === true) {
             gameboard.updateMark(p1.mark);
+            document.querySelector('.gameAnnouncer').textContent = `${p1.name}'s turn`;
         }
         else {
-            gameboard.updateMark(p2.mark)
+            gameboard.updateMark(p2.mark);
+            document.querySelector('.gameAnnouncer').textContent = `${p2.name}'s turn`;
         }
     }
 
 
-    // TODO: Change active player
+    // Change active player
     const changeActive = () => {
         // Swap active player status and update mark
         if (p1.active === false) {
@@ -100,12 +103,16 @@ const gameController = (() => {
             p2.active = false;
             gameboard.updateMark(p1.mark);
             // Display current player message above board
+            document.querySelector('.gameAnnouncer').textContent = `${p1.name}'s turn`;
+
         }
         else {
             p1.active = false;
             p2.active = true;
             gameboard.updateMark(p2.mark);
             // Display current player message above board
+            document.querySelector('.gameAnnouncer').textContent = `${p2.name}'s turn`;
+
         }
     }
 
