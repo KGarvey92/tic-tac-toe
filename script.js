@@ -5,24 +5,39 @@ const gameboard = (() => {
     const boardArray = new Array(9);
     boardArray[0] = 'YabbaDabbaDoo!';
 
+    //Set active mark
+    let activeMark = "";
+
     // TODO: clear gameboard and add new event listeners
     const resetBoard = () => {
         const board = document.querySelectorAll('.gameboardField');
-        board.forEach(element => element.innerHTML = '');
+        board.forEach(element => {
+            if (element.innerHTML !== ''){
+                element.innerHTML = '';
+                element.addEventListener('click', () =>{
+                    element.innerHTML = activeMark;
+                    gameController.changeActive();
+                }, {once: true});
+            }})
     }
 
     const resetArray = () => {
         boardArray.length = 0;
         boardArray.length = 9;
     }
-    
+
+    const updateMark = (mark) => {
+        activeMark = mark;
+    }
     // TODO: check gameboard for winner
 
-        // TODO: If winner report mark to game controller
+        // TODO: If winner report mark to game controller and disable event listeners.
 
     return {
         resetBoard,
-        resetArray
+        resetArray,
+        activeMark,
+        updateMark
     };
 
 })();
@@ -36,6 +51,7 @@ const playerFactory = (playerNum) => {
             player.name = 'Player 1';
         }
         player.mark = document.querySelector('input[name=p1Mark]:checked').value;
+        player.active = false;
         return player;
     }
     else {
@@ -45,6 +61,7 @@ const playerFactory = (playerNum) => {
             player.name = 'Player 2';
         }
         player.mark = document.querySelector('input[name=p2Mark]:checked').value;
+        player.active = false;
         return player;         
     }
 }
@@ -62,15 +79,43 @@ const gameController = (() => {
     }
 
     // TODO: Reset previous game
-        // reset gameboard display and array, set active player randomly
+    const resetGame = () => {
+        gameboard.resetArray();
+        gameboard.resetBoard();
+        Math.random() < 0.5 ? p1.active = true : p2.active = true;
+        if (p1.active === true) {
+            gameboard.updateMark(p1.mark);
+        }
+        else {
+            gameboard.updateMark(p2.mark)
+        }
+    }
 
 
-    // TODO: Check active player
+    // TODO: Change active player
+    const changeActive = () => {
+        // Swap active player status and update mark
+        if (p1.active === false) {
+            p1.active = true;
+            p2.active = false;
+            gameboard.updateMark(p1.mark);
+            // Display current player message above board
+        }
+        else {
+            p1.active = false;
+            p2.active = true;
+            gameboard.updateMark(p2.mark);
+            // Display current player message above board
+        }
+    }
+
 
     // TODO: Display winner (take winning mark as argument)
         // if player.mark = O/X -> display player.name
     return {
-        createPlayers
+        createPlayers,
+        changeActive,
+        resetGame
     };
  
     })();
@@ -100,4 +145,5 @@ const gameController = (() => {
         e.preventDefault();
         document.querySelector('.newGameModal').classList.toggle('hidden');
         gameController.createPlayers();
+        gameController.resetGame();
         });
