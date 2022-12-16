@@ -7,6 +7,7 @@ const gameboard = (() => {
     //Set active mark
     let activeMark = "";
 
+
     // clear gameboard and add new event listeners
     const resetBoard = () => {
         const board = document.querySelectorAll('.gameboardField');
@@ -14,11 +15,13 @@ const gameboard = (() => {
             if (element.innerHTML !== ''){
                 element.innerHTML = '';
                 element.addEventListener('click', () =>{
-                    if (element.innerHTML === ''){
+                    if (element.innerHTML === '' && gameController.gameOver === false){
                         element.innerHTML = activeMark;
                         //report to gameboard array
                         boardArray[element.dataset.index] = activeMark;
+                        gameboard.checkForWinner();
                         gameController.changeActive();
+                        console.log('clicked!');
                     }
                 }, {once: true});
             }})
@@ -42,16 +45,68 @@ const gameboard = (() => {
         activeMark = mark;
     }
     // TODO: check gameboard for winner
+    const checkForWinner = () => {
+        // winning combinations:
+        // 0 - 1 - 2
+        if (boardArray[0] === boardArray[1] && boardArray[0] === boardArray[2] && boardArray[0] != null) {
+            console.log('Winner Found');
+            gameController.gameOver = true;
+            console.log(gameController.gameOver);
+        }
+        // 3 - 4 - 5
+        if (boardArray[3] === boardArray[4] && boardArray[3] === boardArray[5] && boardArray[3] != null) {
+            console.log('Winner Found');
+            gameController.gameOver = true;
+            console.log(gameController.gameOver);
+        }
+        // 6 - 7 - 8
+        if (boardArray[6] === boardArray[7] && boardArray[6] === boardArray[8] && boardArray[6] != null) {
+            console.log('Winner Found');
+            gameController.gameOver = true;
+            console.log(gameController.gameOver);
+        }
+        // 0 - 3 - 6
+        if (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6] && boardArray[0] != null) {
+            console.log('Winner Found');
+            gameController.gameOver = true;
+            console.log(gameController.gameOver);
+        }
+        // 1 - 4 - 7
+        if (boardArray[1] === boardArray[4] && boardArray[1] === boardArray[7] && boardArray[1] != null) {
+            console.log('Winner Found');
+            gameController.gameOver = true;
+            console.log(gameController.gameOver);
+        }
+        // 2 - 5 - 8
+        if (boardArray[2] === boardArray[5] && boardArray[2] === boardArray[8] && boardArray[2] != null) {
+            console.log('Winner Found');
+            gameController.gameOver = true;
+            console.log(gameController.gameOver);
+        }
+        // 0 - 4 - 8
+        if (boardArray[0] === boardArray[4] && boardArray[0] === boardArray[8] && boardArray[0] != null) {
+            console.log('Winner Found');
+            gameController.gameOver = true;
+            console.log(gameController.gameOver);
+        }
 
-        // TODO: If winner report mark to game controller and disable event listeners.
+        // 2 - 4 - 6
+        if (boardArray[2] === boardArray[4] && boardArray[2] === boardArray[6] && boardArray[2] != null) {
+            console.log('Winner Found');
+            gameController.gameOver = true;
+            console.log(gameController.gameOver);
+        }
+
+    }
+
 
     return {
         resetBoard,
         resetArray,
-        activeMark,
         boardArray,
         aiMark,
-        updateMark
+        updateMark,
+        checkForWinner
     };
 
 })();
@@ -87,6 +142,9 @@ const gameController = (() => {
     let p1;
     let p2;
 
+    // boolean to track whether game is over
+    let gameOver = false;
+
     const createPlayers = () => {
         p1 = playerFactory('p1');
         p2 = playerFactory('p2');
@@ -94,6 +152,7 @@ const gameController = (() => {
 
     // Reset previous game
     const resetGame = () => {
+        gameController.gameOver = false;
         gameboard.resetArray();
         gameboard.resetBoard();
         Math.random() < 0.5 ? p1.active = true : p2.active = true;
@@ -147,7 +206,8 @@ const gameController = (() => {
         createPlayers,
         changeActive,
         resetGame,
-        aiTurn
+        aiTurn,
+        gameOver
     };
  
     })();
