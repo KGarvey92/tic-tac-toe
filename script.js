@@ -21,7 +21,7 @@ const gameboard = (() => {
                         boardArray[element.dataset.index] = activeMark;
                         gameboard.checkForWinner();
                         gameController.changeActive();
-                        console.log('clicked!');
+                        console.log('clicked');
                     }
                 }, {once: true});
             }})
