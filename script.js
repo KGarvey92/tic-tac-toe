@@ -92,6 +92,12 @@ const gameboard = (() => {
             gameController.displayWinner(boardArray[2]);
         }
 
+        //handle ties
+        if (gameboard.boardArray.includes(undefined) === false) {
+            gameController.gameOver = true;
+            gameController.displayWinner('tie');
+        }
+
     }
 
 
@@ -190,8 +196,11 @@ const gameController = (() => {
         if (winningMark === p1.mark) {
             document.querySelector('.gameAnnouncer').textContent = `${p1.name} is the winner!`;
         }
-        else {
+        else if (winningMark === p2.mark) {
             document.querySelector('.gameAnnouncer').textContent = `${p2.name} is the winner!`;
+        }
+        else {
+            document.querySelector('.gameAnnouncer').textContent = 'Game is a draw. Play again?';
         }
     }
     // TODO: AI turn logic
