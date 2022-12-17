@@ -12,19 +12,22 @@ const gameboard = (() => {
     const resetBoard = () => {
         const board = document.querySelectorAll('.gameboardField');
         board.forEach(element => {
-            if (element.innerHTML !== ''){
                 element.innerHTML = '';
-                element.addEventListener('click', () =>{
-                    if (element.innerHTML === '' && gameController.gameOver === false){
-                        element.innerHTML = activeMark;
-                        //report to gameboard array
-                        boardArray[element.dataset.index] = activeMark;
-                        gameboard.checkForWinner();
-                        gameController.changeActive();
-                        console.log('clicked');
-                    }
-                }, {once: true});
-            }})
+                element.addEventListener('click', tileHandler, {once: true});
+            })
+    }
+    
+    // function for above event listener
+    function tileHandler(event) {
+        if (event.target.innerHTML === '' && gameController.gameOver === false){
+            event.target.innerHTML = activeMark;
+            //report to gameboard array
+            boardArray[event.target.dataset.index] = activeMark;
+            gameboard.checkForWinner();
+            if (gameController.gameOver === false) {
+                gameController.changeActive();
+            }
+        }
     }
 
     const resetArray = () => {
@@ -49,52 +52,44 @@ const gameboard = (() => {
         // winning combinations:
         // 0 - 1 - 2
         if (boardArray[0] === boardArray[1] && boardArray[0] === boardArray[2] && boardArray[0] != null) {
-            console.log('Winner Found');
             gameController.gameOver = true;
-            console.log(gameController.gameOver);
+            gameController.displayWinner(boardArray[0]);
         }
         // 3 - 4 - 5
         if (boardArray[3] === boardArray[4] && boardArray[3] === boardArray[5] && boardArray[3] != null) {
-            console.log('Winner Found');
             gameController.gameOver = true;
-            console.log(gameController.gameOver);
+            gameController.displayWinner(boardArray[3]);
         }
         // 6 - 7 - 8
         if (boardArray[6] === boardArray[7] && boardArray[6] === boardArray[8] && boardArray[6] != null) {
-            console.log('Winner Found');
             gameController.gameOver = true;
-            console.log(gameController.gameOver);
+            gameController.displayWinner(boardArray[6]);
         }
         // 0 - 3 - 6
         if (boardArray[0] === boardArray[3] && boardArray[0] === boardArray[6] && boardArray[0] != null) {
-            console.log('Winner Found');
             gameController.gameOver = true;
-            console.log(gameController.gameOver);
+            gameController.displayWinner(boardArray[0]);
         }
         // 1 - 4 - 7
         if (boardArray[1] === boardArray[4] && boardArray[1] === boardArray[7] && boardArray[1] != null) {
-            console.log('Winner Found');
             gameController.gameOver = true;
-            console.log(gameController.gameOver);
+            gameController.displayWinner(boardArray[1]);
         }
         // 2 - 5 - 8
         if (boardArray[2] === boardArray[5] && boardArray[2] === boardArray[8] && boardArray[2] != null) {
-            console.log('Winner Found');
             gameController.gameOver = true;
-            console.log(gameController.gameOver);
+            gameController.displayWinner(boardArray[2]);
         }
         // 0 - 4 - 8
         if (boardArray[0] === boardArray[4] && boardArray[0] === boardArray[8] && boardArray[0] != null) {
-            console.log('Winner Found');
             gameController.gameOver = true;
-            console.log(gameController.gameOver);
+            gameController.displayWinner(boardArray[0]);
         }
 
         // 2 - 4 - 6
         if (boardArray[2] === boardArray[4] && boardArray[2] === boardArray[6] && boardArray[2] != null) {
-            console.log('Winner Found');
             gameController.gameOver = true;
-            console.log(gameController.gameOver);
+            gameController.displayWinner(boardArray[2]);
         }
 
     }
@@ -190,8 +185,15 @@ const gameController = (() => {
 
 
     // TODO: Display winner (take winning mark as argument)
+    const displayWinner = (winningMark) => {
         // if player.mark = O/X -> display player.name
-
+        if (winningMark === p1.mark) {
+            document.querySelector('.gameAnnouncer').textContent = `${p1.name} is the winner!`;
+        }
+        else {
+            document.querySelector('.gameAnnouncer').textContent = `${p2.name} is the winner!`;
+        }
+    }
     // TODO: AI turn logic
     const aiTurn = () => {
         // TODO: AI logic
@@ -207,6 +209,7 @@ const gameController = (() => {
         changeActive,
         resetGame,
         aiTurn,
+        displayWinner,
         gameOver
     };
  

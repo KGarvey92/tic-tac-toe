@@ -111,6 +111,10 @@ label input {
     background-color: white;;
 }
 
+.winningField {
+    background-color: lightgreen;
+}
+
 .gameAnnouncer {
     text-align: center;
     font-size: 2rem;
